@@ -1,0 +1,42 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce_dev
+    username: postgres
+    password: postgres
+
+  security:
+    user:
+      name: admin
+      password: admin
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8080
+          jwk-set-uri: http://localhost:8080/.well-known/jwks.json
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    root: INFO
+    com.ecommerce: DEBUG
+    org.springframework.security: INFO
+
+app:
+  jwt:
+    issuer: http://localhost:8080
+    audience: my-shop-api
+
+debug: false

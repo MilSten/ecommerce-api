@@ -1,0 +1,30 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER:https://api.myshop.com}
+          jwk-set-uri: ${JWT_JWKS_URI:https://api.myshop.com/.well-known/jwks.json}
+
+logging:
+  level:
+    root: WARN
+    com.ecommerce: INFO
+
+app:
+  jwt:
+    issuer: ${JWT_ISSUER:https://api.myshop.com}
+    audience: ${JWT_AUDIENCE:my-shop-api}
