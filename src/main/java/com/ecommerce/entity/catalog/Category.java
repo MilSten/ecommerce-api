@@ -31,11 +31,5 @@ public class Category extends BaseEntity {
     private Boolean isActive = true;
 
     @Column(nullable = false)
-    private Integer position = 0;
-
-    @OneToMany(mappedBy = "parentCategory")
-    private java.util.List<Category> subCategories = new java.util.ArrayList<>();
-
-    @OneToMany(mappedBy = "category")
-    private java.util.List<Product> products = new java.util.ArrayList<>();
+    private Integer position;
 }
