@@ -1,15 +1,15 @@
 package com.ecommerce.security;
 
+import com.ecommerce.entity.user.User;
+import com.ecommerce.exception.AuthenticationException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Component;
-import com.ecommerce.entity.user.User;
-import com.ecommerce.exception.AuthenticationException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -38,22 +38,24 @@ public class JwtTokenProvider {
      * Сгенерировать access token
      */
     public String generateAccessToken(User user) {
-        return generateToken(user.getEmail(), jwtExpirationMs, "access");
+        return generateToken(user, jwtExpirationMs, "access");
     }
 
     /**
      * Сгенерировать refresh token
      */
     public String generateRefreshToken(User user) {
-        return generateToken(user.getEmail(), refreshTokenExpirationMs, "refresh");
+        return generateToken(user, refreshTokenExpirationMs, "refresh");
     }
 
     /**
      * Генерация токена
      */
-    private String generateToken(String email, long expirationMs, String tokenType) {
+    private String generateToken(User user, long expirationMs, String tokenType) {
         Instant now = Instant.now();
         Instant expiresAt = now.plus(expirationMs, ChronoUnit.MILLIS);
+        String email = user.getEmail();
+        String role =  user.getRole().name();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer(issuer)
@@ -62,6 +64,10 @@ public class JwtTokenProvider {
                 .expiresAt(expiresAt)
                 .claim("type", tokenType)
                 .build();
+
+        if ("access".equals(tokenType)) {
+            claims = JwtClaimsSet.from(claims).claim("roles", role).build();
+        }
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims))
                 .getTokenValue();
