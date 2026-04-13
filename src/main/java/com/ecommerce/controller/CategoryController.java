@@ -86,12 +86,12 @@ class CategoryController {
          return ResponseEntity.ok(new ApiResponse<>(null, HttpStatus.OK.value()));
      }
 
-     @DeleteMapping("{ids}") // TODO Исправить
-     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-     @Operation(summary = "Delete list categories", description = "Delete a list categories by id")
-     public ResponseEntity<ApiResponse<List<CategoryDto>>> deleteCategoriesByIds(@PathVariable List<UUID> ids) {
+    @DeleteMapping("")
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @Operation(summary = "Delete list categories", description = "Delete a list categories by id")
+    public ResponseEntity<ApiResponse<Void>> deleteCategoriesByIds(@RequestParam List<UUID> ids) {
         categoryService.deleteCategoriesByIds(ids);
         return ResponseEntity.ok(new ApiResponse<>(null, HttpStatus.OK.value()));
-     }
+    }
 
 }
