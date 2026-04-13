@@ -64,6 +64,8 @@ logging:
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 app:
+  file:
+    upload-dir: storage/uploads
   jwt:
     issuer: http://localhost:8080
     audience: my-shop-api

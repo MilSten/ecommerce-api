@@ -1,5 +1,7 @@
 package com.ecommerce.util;
 
+import java.util.Set;
+
 public class Constants {
 
     public static final class Validation {
@@ -24,6 +26,6 @@ public class Constants {
 
     public static final class File {
         public static final String UPLOAD_DIR = "storage/uploads";
-        public static final String ALLOWED_EXTENSIONS = "jpg,jpeg,png,webp,gif";
+        public static final Set<String> ALLOWED_EXTENSIONS = Set.of("jpg", "jpeg", "png", "webp", "gif");
     }
 }
