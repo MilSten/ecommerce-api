@@ -18,6 +18,7 @@ public class ProductDto extends BaseDto {
     private BigDecimal cost;
     private Boolean isActive;
     private Integer stockQuantity;
+    private boolean inStock;
     private BigDecimal rating;
     private Integer reviewCount;
 

@@ -1,7 +1,7 @@
 package com.ecommerce.dto.catalog;
 
 import com.ecommerce.dto.BaseDto;
-import com.ecommerce.entity.catalog.Product;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Data
@@ -9,7 +9,10 @@ import lombok.*;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ProductAttributeDto extends BaseDto {
-    private Product product;
+
+    @NotBlank(message = "Attribute name is required")
     private String name;
+
+    @NotBlank(message = "Attribute value is required")
     private String value;
 }
