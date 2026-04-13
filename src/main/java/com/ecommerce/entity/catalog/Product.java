@@ -3,6 +3,7 @@ package com.ecommerce.entity.catalog;
 import com.ecommerce.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import java.math.BigDecimal;
 
 @Entity
@@ -51,14 +52,18 @@ public class Product extends BaseEntity {
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 10)
     private java.util.List<ProductVariant> variants = new java.util.ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 10)
     private java.util.List<ProductAttribute> attributes = new java.util.ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 10)
     private java.util.List<ProductImage> images = new java.util.ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @BatchSize(size = 10)
     private java.util.List<ProductReview> reviews = new java.util.ArrayList<>();
 }

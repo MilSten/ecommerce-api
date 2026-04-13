@@ -29,6 +29,6 @@ public interface ProductRepository extends BaseRepository<Product> {
             Pageable pageable
     );
 
-    @Query(value = "SELECT p FROM Product p LEFT JOIN FETCH p.variants v LEFT JOIN FETCH p.images img LEFT JOIN FETCH p.attributes WHERE p.id = :id")
+    @Query("SELECT p FROM Product p LEFT JOIN FETCH p.variants WHERE p.id = :id")
     Optional<Product> findByIdWithRelations(@Param("id") UUID id);
 }
