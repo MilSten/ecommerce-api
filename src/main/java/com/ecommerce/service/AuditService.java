@@ -26,6 +26,7 @@ public class AuditService {
                     .getPrincipal();
 
             // TODO: Получить реального пользователя по email
+
             UUID userId = UUID.randomUUID();
 
             String changesJson = objectMapper.writeValueAsString(changes);
